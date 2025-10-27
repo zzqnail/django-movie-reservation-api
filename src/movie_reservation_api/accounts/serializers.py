@@ -15,6 +15,14 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
 
+    def post(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            is_staff = validated_data['is_staff']
+        )
+
 class MeSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
